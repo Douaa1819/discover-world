@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>hoo</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -14,9 +14,6 @@
         
     </head>
     <body class="antialiased">
-        <header>
-    <x-navbar></x-navbar>
-    </header>
- <x-recit> hey </x-recit>
+        <h1>login</h1>
     </body>
 </html>
