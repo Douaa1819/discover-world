@@ -55,7 +55,7 @@
             </div>
             <div class="relative group shadow-lg">
                 <div class="overflow-hidden rounded-lg aspect-w-16 aspect-h-9">
-                    <img class="object-cover w-full h-full transition-all duration-300 transform group-hover:scale-125"  src="{{asset('img/two.jpg')}}" alt="" />
+                    <img class="object-cover w-full h-full"  src="{{asset('img/four.jpg')}}" alt="" />
                 </div>
                 <p class="mt-6 text-sm font-normal text-gray-600 font-pj">November 16, 2021</p>
                 <p class="mt-4 text-xl font-bold text-gray-900 font-pj">How To Optimize Progressive Web Apps: Going Beyond The Basics</p>
