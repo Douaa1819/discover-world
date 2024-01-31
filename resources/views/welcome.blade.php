@@ -16,7 +16,9 @@
     <body class="antialiased">
         <header>
     <x-navbar></x-navbar>
+    <x-add-recit></x-add-recit>
     </header>
- <x-recit> hey </x-recit>
+
+ <x-recit> </x-recit>
     </body>
 </html>
