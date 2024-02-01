@@ -11,6 +11,7 @@ class Recit extends Model
     protected $fillable = [
         'name',
         'description',
+        'id_destination',
         'conseil',
     ];
 }
