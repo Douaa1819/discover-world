@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecitController;
 use App\Http\Controllers\DestinationController;
+use App\Models\Recit;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,10 +37,10 @@ Route::middleware('auth')->group(function () {
     // Route::get('/ajoutRecit', [DestinationController::class, 'index'])->name('ajoutRecit');
     // Route::post('/ajoutRecit', [RecitController::class, 'store_recit'])->name('recit.store');
 });
-
+Route::get('/', [RecitController::class, 'filterPosts'])->name('filterPosts');
 Route::get('/ajoutRecit', [DestinationController::class, 'index'])->name('ajoutRecit');
-
 Route::post('/ajoutRecit', [RecitController::class, 'store_recit'])->name('recit.store');
+Route::get('/filter-posts', [RecitController::class, 'filterPosts'])->name('filterPosts');
 
 
 require __DIR__.'/auth.php';

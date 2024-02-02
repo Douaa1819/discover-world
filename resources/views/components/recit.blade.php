@@ -22,11 +22,9 @@
         </div>
            <div class="flex flex-wrap justify-evenly rounded-lg">
     <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">All</button>
-    <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg ">Europe</button>
-    <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">Africa</button>
-    <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">Asia</button>
-    <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">America</button>
-    <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">Asia</button>
+    @foreach ($destinations as $destination)
+    <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">{{$destination->nomDestination}}</button>                               
+    @endforeach 
 </div>
 
         </div>

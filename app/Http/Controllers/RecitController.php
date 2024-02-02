@@ -24,6 +24,12 @@ class RecitController extends Controller
     //     return view('profile', ['UserRecits' => $userRecits]);
     // }
 
+    public function index(){
+        $adventures = Recit::with('destination','photo')->get();
+        $destinations = Destination::with('photo')->get();
+        return view('welcome', compact('adventures', 'destinations'));
+    }
+
     public function store_recit(Request $request)
     {
         
@@ -48,8 +54,34 @@ class RecitController extends Controller
                 }
             }
 
-          //  return redirect('welcome',compact('destinations'));
        
-           // return redirect('/login')->with('error', ' error Please Try Again.');
         }
+
+
+
+        public function filterPosts(Request $request)
+        {
+            $sortOption = $request->input('sort');
+        
+            $adventuresQuery = Recit::query();
+        
+            // Filter by time
+            if ($sortOption === 'oldest') {
+                $adventuresQuery->orderBy('created_at');
+            } elseif ($sortOption === 'newest') {
+                $adventuresQuery->orderByDesc('created_at');
+            }
+        
+            // Get the filtered 
+            $recits = $adventuresQuery->get();
+        
+            // Assuming you also want to pass destinations to the view for the dropdown
+            $destinations = Destination::all();
+        
+            return view('welcome', compact('recits', 'destinations'));
+        }
+        
+
     }
+   
+    

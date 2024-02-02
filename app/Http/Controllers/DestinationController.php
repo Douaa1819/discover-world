@@ -8,14 +8,25 @@ class DestinationController extends Controller
 {
     public function index()
     {
-        {//->pluck('nomDestination', 'id')
+        //->pluck('nomDestination', 'id')
             $destinations = Destination::all();
                 // `pluck` pour obtenir un tableau associatif [id => nomDestination]
-        $hhh = 'hani wahhaaaaaaaaaaaani';
-                return view('ajoutRecit', ['destinations' => $destinations,'hhh'=> $hhh]);
+                return view('ajoutRecit', ['destinations' => $destinations]);
 
     
     
-        }
+        
+    }
+
+    public function Showdestination()
+    {
+      
+            $destinations = Destination::all();
+                return view('welcome', ['destinations' => $destinations]);
+
+    
+     
+        
     }
 }
+
