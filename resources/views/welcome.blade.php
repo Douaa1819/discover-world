@@ -43,12 +43,18 @@
                         <option value="newest">Newest</option>
                     </select>
                    
-        </form>
-            <button class="px-4 py-3 bg-blue-500 text-white  unde hover:bg-blue-600 rounded-lg">All</button>
-            @foreach ($destinations as $destination)
-            <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">{{$destination->nomDestination}}</button>                               
-            @endforeach 
-             </div>
+                    </form>
+                    <form action="{{ route('filterPosts') }}" method="GET">
+                        <select name="destination">
+                            <option value="">All</option>
+                            @foreach ($destinations as $destination)
+                                <option value="{{ $destination->id }}">{{ $destination->nomDestination }}</option>
+                            @endforeach
+                        </select>
+                        <button type="submit">Filtrer</button>
+                    </form>
+
+
              
                 </div>
         

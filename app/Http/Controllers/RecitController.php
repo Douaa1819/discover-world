@@ -57,30 +57,21 @@ class RecitController extends Controller
         }
 
 
-
         public function filterPosts(Request $request)
         {
-            $sortOption = $request->input('sort');
+            $destinationFilter = $request->input('destination');
         
             $adventuresQuery = Recit::query();
         
-            if ($sortOption === 'oldest') {
-                $adventuresQuery->orderBy('created_at');
-            } elseif ($sortOption === 'newest') {
-                $adventuresQuery->orderByDesc('created_at');
+            if ($destinationFilter) {
+                $adventuresQuery->where('id_destination', $destinationFilter);
             }
         
             $recits = $adventuresQuery->get();
             $totalRecits = Recit::count();
             $destinations = Destination::all();
-        
-            // Ajouter les destinations populaires
-            $destinationsPopulaires = Destination::withCount('recits')
-                ->orderBy('recits_count', 'desc')
-                ->take(3) 
-                ->get();
+            $destinationsPopulaires = Destination::withCount('recits')->orderBy('recits_count', 'desc')->take(3)->get();
         
             return view('welcome', compact('recits', 'destinations', 'totalRecits', 'destinationsPopulaires'));
-        }
-        
+        }   
     }
