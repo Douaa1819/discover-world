@@ -16,14 +16,6 @@ class RecitController extends Controller
 {
 
 
-    // public function getUserRecits()
-    // {
-    //     $user = auth()->user();
-    //     $userRecits = $user->userRecits;
-
-    //     return view('profile', ['UserRecits' => $userRecits]);
-    // }
-
     public function index(){
         $adventures = Recit::with('destination','photo')->get();
         $destinations = Destination::with('photo')->get();
@@ -75,7 +67,7 @@ class RecitController extends Controller
             // Get the filtered 
             $recits = $adventuresQuery->get();
         
-            // Assuming you also want to pass destinations to the view for the dropdown
+          
             $destinations = Destination::all();
         
             return view('welcome', compact('recits', 'destinations'));

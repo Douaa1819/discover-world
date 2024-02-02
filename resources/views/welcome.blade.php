@@ -57,8 +57,9 @@
                                 <img class="object-cover w-full h-full transition-all duration-300 transform group-hover:scale-125"  src="{{asset('img/two.jpg')}}" alt="" />
                                 {{-- <img class="object-cover w-full h-full transition-all duration-300 transform group-hover:scale-125" src="{{ asset('storage/' . $recit->images->first()->path) }}" alt="Image"> --}}
                             </div>
+                            <p class="mt-4 text-xl font-bold text-gray-900 font-pj">{{ $recit->name}}</p>
                             <p class="mt-6 text-sm font-normal text-gray-600 font-pj">{{ $recit->created_at->format('F d, Y') }}</p>
-                            <p class="mt-4 text-xl font-bold text-gray-900 font-pj">{{ $recit->description }}</p>
+                            <p class="mt-4  text-gray-900">{{ $recit->description }}</p>
                             <a href="#" title="">
                                 <span class="absolute inset-0" aria-hidden="true"></span>
                             </a>
