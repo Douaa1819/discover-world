@@ -44,4 +44,6 @@
             </x-primary-button>
         </div>
     </form>
+    <h1>the error is {{$error}}</h1>
+    
 </x-guest-layout>

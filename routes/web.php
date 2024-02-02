@@ -1,7 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecitController;
+use App\Http\Controllers\DestinationController;
 use Illuminate\Support\Facades\Route;
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +33,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::get('/ajoutRecit', [DestinationController::class, 'index'])->name('ajoutRecit');
+    // Route::post('/ajoutRecit', [RecitController::class, 'store_recit'])->name('recit.store');
 });
 
+Route::get('/ajoutRecit', [DestinationController::class, 'index'])->name('ajoutRecit');
+
+Route::post('/ajoutRecit', [RecitController::class, 'store_recit'])->name('recit.store');
+
+
 require __DIR__.'/auth.php';
+    

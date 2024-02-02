@@ -42,4 +42,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+
+
+
+
+
+    //pour l afficher de recit de chaque utilisateur 
+    public function Recits()
+    {
+        return $this->hasMany(Recit::class);
+    }
+
+    public function userRecits()
+    {
+        return $this->hasMany(Recit::class, 'id')->with('destination', 'images');
+    }
 }

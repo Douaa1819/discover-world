@@ -26,7 +26,7 @@
     <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">Africa</button>
     <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">Asia</button>
     <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">America</button>
-    <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">Oceania</button>
+    <button class="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 rounded-lg">Asia</button>
 </div>
 
         </div>
