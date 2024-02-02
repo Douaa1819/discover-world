@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Destination extends Model
 {
     use HasFactory;
-    public function recit()
+    public function recits()
     {
-        return $this->hasMany(Recit::class);
+        return $this->hasMany(Recit::class, 'id_destination');
     }
 
     

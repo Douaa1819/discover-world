@@ -21,7 +21,7 @@ class Recit extends Model
   
     public function destination()
     {
-        return $this->belongsTo(Destination::class);
+        return $this->belongsTo(Destination::class, 'id_destination');
     }
     public function UserDestination()
     {

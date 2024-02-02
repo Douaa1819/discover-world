@@ -15,12 +15,20 @@ use Illuminate\Support\Facades\Validator;
 class RecitController extends Controller
 {
 
-
-    public function index(){
-        $adventures = Recit::with('destination','photo')->get();
-        $destinations = Destination::with('photo')->get();
-        return view('welcome', compact('adventures', 'destinations'));
+    public function index()
+    {
+        $recits = Recit::all();
+        $destinations = Destination::all();
+        $totalRecits = Recit::count();
+        $destinationsPopulaires = Destination::withCount('recits')
+            ->orderBy('recits_count', 'desc')
+            ->take(3)
+            ->get();
+    
+        return view('welcome', compact('recits', 'destinations', 'totalRecits', 'destinationsPopulaires'));
     }
+    
+    
 
     public function store_recit(Request $request)
     {
@@ -46,7 +54,6 @@ class RecitController extends Controller
                 }
             }
 
-       
         }
 
 
@@ -57,23 +64,23 @@ class RecitController extends Controller
         
             $adventuresQuery = Recit::query();
         
-            // Filter by time
             if ($sortOption === 'oldest') {
                 $adventuresQuery->orderBy('created_at');
             } elseif ($sortOption === 'newest') {
                 $adventuresQuery->orderByDesc('created_at');
             }
         
-            // Get the filtered 
             $recits = $adventuresQuery->get();
-        
-          
+            $totalRecits = Recit::count();
             $destinations = Destination::all();
         
-            return view('welcome', compact('recits', 'destinations'));
+            // Ajouter les destinations populaires
+            $destinationsPopulaires = Destination::withCount('recits')
+                ->orderBy('recits_count', 'desc')
+                ->take(3) 
+                ->get();
+        
+            return view('welcome', compact('recits', 'destinations', 'totalRecits', 'destinationsPopulaires'));
         }
         
-
     }
-   
-    

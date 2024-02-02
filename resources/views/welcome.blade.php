@@ -34,13 +34,15 @@
                 </div>
                 <form action="{{ route('filterPosts') }}" method="get">
                    <div class="flex flex-wrap justify-evenly rounded-lg">
+                    
                     <label for="sort" class=" p-2 text-lg font-semibold text-gray-700">Sort By:</label>
+                    <button type="submit" class="block ml-3 mt-1 p-1 border ">Done</button>
                     <select id="sort" name="sort" class="block ml-3 mt-1 p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200">
                         <option disabled selected>Filter by Time</option>
                         <option value="oldest">Oldest</option>
                         <option value="newest">Newest</option>
                     </select>
-                    <button type="submit">Filtrer</button>
+                   
         </form>
             <button class="px-4 py-3 bg-blue-500 text-white  unde hover:bg-blue-600 rounded-lg">All</button>
             @foreach ($destinations as $destination)
@@ -60,6 +62,7 @@
                             <p class="mt-4 text-xl font-bold text-gray-900 font-pj">{{ $recit->name}}</p>
                             <p class="mt-6 text-sm font-normal text-gray-600 font-pj">{{ $recit->created_at->format('F d, Y') }}</p>
                             <p class="mt-4  text-gray-900">{{ $recit->description }}</p>
+                            <p class="mt-4  text-gray-900">{{ $recit->conseil }}</p>
                             <a href="#" title="">
                                 <span class="absolute inset-0" aria-hidden="true"></span>
                             </a>
@@ -69,7 +72,25 @@
                 
         
         </section>
-        </body>
-        </html>
+        <section class="py-12 bg-blue-500 sm:py-16">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="text-center mb-6">
+                    <h2 class="text-xl font-bold underline">Statistiques</h2>
+                    <p class="">Nombre total de récits : {{ $totalRecits }}</p>
+                </div>
+                
+                <div class="text-center">
+                    <h3 class="text-lg font-bold underline">Destinations les plus populaires</h3>
+                    <ul>
+                        @foreach ($destinationsPopulaires as $destination)
+                            <li>{{ $destination->nomDestination }} : {{ $destination->recits_count }} récits</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        
+        
     </body>
 </html>
