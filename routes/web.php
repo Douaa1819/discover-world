@@ -31,6 +31,9 @@ Route::get('/ajoutRecit', [DestinationController::class, 'index'])->name('ajoutR
 Route::post('/ajoutRecit', [RecitController::class, 'store_recit'])->name('recit.store');
 Route::get('/filter-posts', [RecitController::class, 'filterPosts'])->name('filterPosts');
 Route::get('/', [RecitController::class, 'index'])->name('home');
+Route::get('/recits/{id}', [RecitController::class, 'show'])->name('recits.show');
+
+
 
 
 

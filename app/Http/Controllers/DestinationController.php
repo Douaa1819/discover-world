@@ -8,13 +8,9 @@ class DestinationController extends Controller
 {
     public function index()
     {
-        //->pluck('nomDestination', 'id')
             $destinations = Destination::all();
                 // `pluck` pour obtenir un tableau associatif [id => nomDestination]
                 return view('ajoutRecit', ['destinations' => $destinations]);
-
-    
-    
         
     }
 

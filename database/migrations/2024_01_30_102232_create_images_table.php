@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('path');
             $table->unsignedBigInteger('id_adventure');
-            $table->foreign('id_adventure')->references('id')->on('images')->onDelete('cascade');
+            $table->foreign('id_adventure')->references('id')->on('recits')->onDelete('cascade');
             $table->timestamps();
         });
     }

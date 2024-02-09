@@ -7,14 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    protected $fillable = ['path', 'recit_id'];
+    protected $fillable = ['path', 'id_adventure'];
 
     public function recit()
     {
-        return $this->belongsTo(Recit::class);
-    }
-    public function recits()
-    {
-        return $this->belongsTo(Recit::class);
+        return $this->belongsTo(Recit::class, 'id_adventure');
     }
 }

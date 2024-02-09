@@ -32,49 +32,69 @@
                     <p class="text-blue-700 font-lato text-6xl font-bold leading-normal">Where do you</p>
                     <div class="text-black font-lato text-6xl font-bold leading-normal mb-4">want to go?</div>
                 </div>
-                <form action="{{ route('filterPosts') }}" method="get">
-                   <div class="flex flex-wrap justify-evenly rounded-lg">
-                    
-                    <label for="sort" class=" p-2 text-lg font-semibold text-gray-700">Sort By:</label>
-                    <button type="submit" class="block ml-3 mt-1 p-1 border ">Done</button>
-                    <select id="sort" name="sort" class="block ml-3 mt-1 p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200">
-                        <option disabled selected>Filter by Time</option>
-                        <option value="oldest">Oldest</option>
-                        <option value="newest">Newest</option>
-                    </select>
-                   
+                <div style="display: flex; justify-content: center; align-items: center; gap: 220px; flex-wrap: wrap; padding: 20px;">
+                    <!--Filter by Time -->
+                    <form action="{{ route('filterPosts') }}" method="get" style="display: flex; align-items: center; gap: 10px;">
+                        <label for="sort" style="font-weight: bold;">Filter by Time:</label>
+                        <select id="sort" name="sort" class="block p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                            <option disabled selected>Select</option>
+                            <option value="oldest">Oldest</option>
+                            <option value="newest">Newest</option>
+                        </select>
+                        <button type="submit" class="p-2 border border-indigo-500 text-indigo-500 rounded-md shadow-sm hover:text-white hover:bg-indigo-500">GO!</button>
                     </form>
-                    <form action="{{ route('filterPosts') }}" method="GET">
-                        <select name="destination">
+                
+                    <!--Filter by Destination -->
+                    <form action="{{ route('filterPosts') }}" method="GET" style="display: flex; align-items: center; gap: 10px;">
+                        <label for="destination" style="font-weight: bold;">Filter by Destination:</label>
+                        <select id="destination" name="destination" class="block p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                            <option disabled selected>Select</option>
                             <option value="">All</option>
                             @foreach ($destinations as $destination)
                                 <option value="{{ $destination->id }}">{{ $destination->nomDestination }}</option>
                             @endforeach
                         </select>
-                        <button type="submit">Filtrer</button>
+                        <button type="submit" class="p-2 border border-indigo-500 text-indigo-500 rounded-md shadow-sm hover:text-white hover:bg-indigo-500">GO!</button>
                     </form>
-
-
-             
                 </div>
-        
-                <div class="grid max-w-3xl grid-cols-1 mx-auto mt-8 text-center sm:mt-16 sm:text-left sm:grid-cols-2 gap-y-8 gap-x-8 lg:grid-cols-3">
+                
+                <div class="grid max-w-7xl grid-cols-1 mx-auto mt-8 text-center sm:mt-16 sm:text-left sm:grid-cols-2 gap-y-8 gap-x-8 lg:grid-cols-3">
                     @foreach ($recits as $recit)
-                        <div class="relative group shadow-lg">
+                    @yield('content')
+                        <div class="relative group shadow-lg flex flex-col">
                             <div class="overflow-hidden rounded-lg aspect-w-16 aspect-h-9">
-                                <img class="object-cover w-full h-full transition-all duration-300 transform group-hover:scale-125"  src="{{asset('img/two.jpg')}}" alt="" />
-                                {{-- <img class="object-cover w-full h-full transition-all duration-300 transform group-hover:scale-125" src="{{ asset('storage/' . $recit->images->first()->path) }}" alt="Image"> --}}
+                                @if($recit->images->isNotEmpty())
+                                <img class="object-cover w-full h-full transition-all duration-300 transform group-hover:scale-125" src="{{ Storage::url($recit->images->first()->path) }}" alt="Image principale du récit" />
+                                @else
+                                <img class="object-cover w-full h-full transition-all duration-300 transform group-hover:scale-125" src="{{asset('img/two.jpg')}}" alt="Image placeholder" />
+                                 @endif
                             </div>
-                            <p class="mt-4 text-xl font-bold text-gray-900 font-pj">{{ $recit->name}}</p>
-                            <p class="mt-6 text-sm font-normal text-gray-600 font-pj">{{ $recit->created_at->format('F d, Y') }}</p>
-                            <p class="mt-4  text-gray-900">{{ $recit->description }}</p>
-                            <p class="mt-4  text-gray-900">{{ $recit->conseil }}</p>
-                            <a href="#" title="">
-                                <span class="absolute inset-0" aria-hidden="true"></span>
-                            </a>
+                            <div class="flex flex-col flex-grow p-4">
+                                <p class="text-xl font-bold text-gray-900 font-pj">{{ $recit->name }}</p>
+                                <p class="text-sm font-normal text-gray-600 font-pj">{{ $recit->created_at->format('F d, Y') }}</p>
+                
+                                {{--  description --}}
+                                <div class="mt-4 flex-grow">
+                                    <p class="font-semibold text-gray-900">Description:</p>
+                                    <p class="text-gray-900">{{ \Illuminate\Support\Str::limit($recit->description, 100, $end='...') }}</p>
+                                </div>
+                
+                                {{--  advice --}}
+                                <div class="mt-4 mb-4">
+                                    <p class="font-semibold text-gray-900">Conseil:</p>
+                                    <p class="text-gray-900">{{ \Illuminate\Support\Str::limit($recit->conseil, 70, $end='...') }}</p>
+                                </div>
+                               
+                                <a href="{{ route('recits.show', $recit->id) }}" title="Read More" class="text-blue-500 hover:underline mt-auto">
+                                    Read More
+                                </a>
+                                
+                            </div>
                         </div>
                     @endforeach
                 </div>
+                
+                
                 
         
         </section>
@@ -82,11 +102,11 @@
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="text-center mb-6">
                     <h2 class="text-xl font-bold underline">Statistiques</h2>
-                    <p class="">Nombre total de récits : {{ $totalRecits }}</p>
+                    <p>Nombre total de récits : {{ $totalRecits }}</p>
                 </div>
                 
                 <div class="text-center">
-                    <h3 class="text-lg font-bold underline">Destinations les plus populaires</h3>
+                    <h3 class="text-lg font-semibold underline">Destinations les plus populaires</h3>
                     <ul>
                         @foreach ($destinationsPopulaires as $destination)
                             <li>{{ $destination->nomDestination }} : {{ $destination->recits_count }} récits</li>
@@ -95,7 +115,6 @@
                 </div>
             </div>
         </section>
-        
         
         
     </body>

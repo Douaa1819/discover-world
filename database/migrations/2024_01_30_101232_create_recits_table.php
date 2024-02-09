@@ -18,10 +18,6 @@ return new class extends Migration
         $table->string('conseil');
         $table->unsignedBigInteger('id_destination');
         $table->foreign('id_destination')->references('id')->on('destinations')->onDelete('cascade');
-        $table->unsignedBigInteger('id_image');
-        $table->foreign('id_image')->references('id')->on('images')->onDelete('cascade');
-        $table->unsignedBigInteger('id_user');
-        $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         $table->timestamps();
     });
     }
